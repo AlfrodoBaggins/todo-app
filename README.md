@@ -1,6 +1,7 @@
 ## Install Dependencies
 `pip install fastapi uvicorn sqlalchemy`
 `pip install alembic`
+`pip install pydantic[email]`
 
 ## Run Local API Server
 `uvicorn main:app --reload`
