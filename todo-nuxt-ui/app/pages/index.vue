@@ -4,20 +4,23 @@ const { get_todos, create_todo } = useTodos()
 
 interface Todo {
   id: number | string
-  title: string
+  task: string
 }
 
 const todos = ref<Todo[]>([])
-const newTodo = ref('')
+const form = ref({
+    task: '',
+    done: false,
+})
 
 const loadTodos = async () => {
   todos.value = await get_todos()
 }
 
 const submitTodo = async () => {
-  if (newTodo.value.trim()) {
-    await create_todo(newTodo.value)
-    newTodo.value = ''
+  if (form.value.task.trim()) {
+    await create_todo(form.value.task)
+    form.value.task = ''
     await loadTodos()
   }
 }
@@ -26,40 +29,23 @@ onMounted(loadTodos)
 </script>
 
 <template>
-  <div class="mx-auto p-10 bg-[#282929] w-full h-full">
+  <div class="mx-auto p-10 w-full h-full">
     <h1 class="text-2xl text-[#ACB7C7] font-bold mb-4">My Todo App</h1>
 
-    <form @submit.prevent="submitTodo" class="flex gap-2 mb-6">
-      <input
-        v-model="newTodo"
-        type="text"
-        placeholder="Add a new todo"
-        class="border px-4 py-2 w-full rounded"
-      />
-      <UButton class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Add</UButton>
-    </form>
-
-    <UForm>
-      <template #default>
-        <div class="flex gap-2 mb-6">
-          <input
-            v-model="newTodo"
-            type="text"
-            placeholder="Add a new todo"
-            class="border px-4 py-2 w-full rounded"
-          />
-          <UButton class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Add</UButton>
-        </div>
-      </template>
+    <UForm :state="form" @submit="submitTodo">
+      <UFormField label="Add Task">
+        <UInput v-model="form.task" placeholder="Add task here..." variant="outline" highlight/>
+      </UFormField>
+      <UButton type="submit" color="primary" variant="solid">Submit</UButton>
     </UForm>
 
     <ul>
       <li
         v-for="todo in todos"
         :key="todo.id"
-        class="p-2 border-b"
+        class="p-2"
       >
-        {{ todo.title }}
+        {{ todo.task }}
       </li>
     </ul>
   </div>

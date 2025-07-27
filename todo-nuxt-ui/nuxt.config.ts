@@ -9,13 +9,13 @@ export default defineNuxtConfig({
     '@nuxt/content',
     '@nuxt/ui',
     '@nuxt/eslint',
-    '@nuxt/image'
+    '@nuxt/image',
+    '@nuxthq/ui',
   ],
-
+  css: ['~/assets/css/main.css'],
   vite: {
     plugins: [
       tailwindcss(),
     ]
   },
-  css: ['~/assets/css/main.css'],
 })
