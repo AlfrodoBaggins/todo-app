@@ -26,8 +26,8 @@ onMounted(loadTodos)
 </script>
 
 <template>
-  <div class="max-w-xl mx-auto mt-10">
-    <h1 class="text-2xl font-bold mb-4">My Todo App</h1>
+  <div class="mx-auto p-10 bg-[#282929] w-full h-full">
+    <h1 class="text-2xl text-[#ACB7C7] font-bold mb-4">My Todo App</h1>
 
     <form @submit.prevent="submitTodo" class="flex gap-2 mb-6">
       <input
@@ -36,8 +36,22 @@ onMounted(loadTodos)
         placeholder="Add a new todo"
         class="border px-4 py-2 w-full rounded"
       />
-      <button class="bg-blue-500 text-white px-4 py-2 rounded">Add</button>
+      <UButton class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Add</UButton>
     </form>
+
+    <UForm>
+      <template #default>
+        <div class="flex gap-2 mb-6">
+          <input
+            v-model="newTodo"
+            type="text"
+            placeholder="Add a new todo"
+            class="border px-4 py-2 w-full rounded"
+          />
+          <UButton class="bg-blue-500 text-white px-4 py-2 rounded cursor-pointer">Add</UButton>
+        </div>
+      </template>
+    </UForm>
 
     <ul>
       <li
