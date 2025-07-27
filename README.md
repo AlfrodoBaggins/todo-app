@@ -2,6 +2,7 @@
 `pip install fastapi uvicorn sqlalchemy`
 `pip install alembic`
 `pip install pydantic[email]`
+`pip install passlib[bcrypt]`
 
 ## Run Local API Server
 `uvicorn main:app --reload`
